@@ -1,0 +1,12 @@
+{
+  "name": "SZC AI — Local Creative Agent",
+  "short_name": "SZC AI",
+  "description": "A local-first AI development and creative workspace.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#101318",
+  "theme_color": "#101318",
+  "icons": []
+}

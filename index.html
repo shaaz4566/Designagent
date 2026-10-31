@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101318">
+  <meta name="description" content="SZC AI — local-first creative and development agent for iPad.">
+  <title>SZC AI — Local Creative Agent</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><div class="brand-mark">S</div><div><strong>SZC AI</strong><small>LOCAL WORKSPACE</small></div></div>
+      <button class="new-task" id="newTask">＋ <span>New workspace</span></button>
+      <div class="nav-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="chat">◈ <span>Agent chat</span></button>
+      <button class="nav-item" data-view="developer">⌘ <span>Developer studio</span></button>
+      <button class="nav-item" data-view="files">▤ <span>Project files</span></button>
+      <button class="nav-item" data-view="settings">⚙ <span>Model & settings</span></button>
+      <div class="sidebar-bottom">
+        <div class="status-line"><span class="status-dot"></span><span id="connectionLabel">Browser ready</span></div>
+        <small>Local-first · v0.1</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Menu">☰</button>
+        <div><span class="eyebrow" id="viewEyebrow">PERSONAL AI WORKSPACE</span><h1 id="viewTitle">Agent chat</h1></div>
+        <div class="top-actions"><span class="mode-pill" id="modePill">LOCAL MODE</span><button class="icon-btn" id="installBtn" hidden>＋ Install</button></div>
+      </header>
+
+      <section class="view active" id="chatView">
+        <div class="welcome">
+          <div class="orb">✳</div>
+          <p class="eyebrow">YOUR ON-DEVICE CREATIVE PARTNER</p>
+          <h2>What shall we<br><em>create today?</em></h2>
+          <p class="muted intro">Plan, build and inspect projects from one workspace. Load a local model for on-device AI, or use the built-in project tools without one.</p>
+        </div>
+        <div class="quick-grid">
+          <button class="quick-card" data-prompt="Create a responsive landing page for a premium business. Include a hero, services, testimonials and contact section."><b>▧</b><strong>Build a website</strong><small>Responsive pages and components</small></button>
+          <button class="quick-card" data-prompt="Create a clean SVG logo concept with editable vector paths and a matching color palette."><b>✎</b><strong>Create a vector</strong><small>SVG graphics and logo concepts</small></button>
+          <button class="quick-card" data-prompt="Create a simple interactive web application with a polished interface. Explain the files and test it."><b>⌘</b><strong>Build an app</strong><small>Interactive browser applications</small></button>
+          <button class="quick-card" data-prompt="Help me plan a 3D concept and produce a Three.js starter scene."><b>◇</b><strong>Explore 3D</strong><small>Procedural 3D starter projects</small></button>
+        </div>
+        <div class="chat-area" id="chatArea" aria-live="polite">
+          <div class="message assistant"><div class="avatar">S</div><div class="bubble"><strong>Welcome to SZC AI.</strong><p>Load a supported local model in Model & settings, then ask me to work on a project. You can also use Developer Studio to edit and preview code without an AI model.</p></div></div>
+        </div>
+        <form class="composer" id="chatForm">
+          <textarea id="promptInput" rows="2" placeholder="Tell SZC AI what you want to build…" autocomplete="off"></textarea>
+          <div class="composer-foot"><span id="modelStatus">No model loaded · tools still available</span><button class="send-btn" type="submit">Send ↗</button></div>
+        </form>
+      </section>
+
+      <section class="view" id="developerView">
+        <div class="studio-toolbar"><div><strong>Developer studio</strong><small>Editable local project · preview runs in a sandboxed frame</small></div><div class="toolbar-actions"><button class="secondary-btn" id="resetCode">Reset</button><button class="primary-btn" id="runCode">▶ Run preview</button></div></div>
+        <div class="editor-layout">
+          <div class="editor-panel">
+            <div class="file-tabs"><button class="file-tab active" data-file="html">index.html</button><button class="file-tab" data-file="css">styles.css</button><button class="file-tab" data-file="js">app.js</button></div>
+            <textarea id="codeEditor" spellcheck="false" aria-label="Code editor"></textarea>
+            <div class="editor-foot"><span id="editorStatus">Ready</span><button class="text-btn" id="downloadProject">Export project ZIP ↓</button></div>
+          </div>
+          <div class="preview-panel"><div class="preview-head"><span>LIVE PREVIEW</span><span class="preview-dot">●</span></div><iframe id="previewFrame" title="Website preview" sandbox="allow-scripts"></iframe></div>
+        </div>
+      </section>
+
+      <section class="view" id="filesView">
+        <div class="section-card"><div class="section-heading"><div><h2>Project library</h2><p class="muted">Files are stored in this browser on this iPad.</p></div><button class="primary-btn" id="exportAll">Export workspace</button></div><div id="fileList" class="file-list"><div class="empty-state">No saved projects yet. Create or edit a project in Developer Studio.</div></div></div>
+      </section>
+
+      <section class="view" id="settingsView">
+        <div class="settings-grid">
+          <div class="section-card"><p class="eyebrow">LOCAL INFERENCE</p><h2>AI model engine</h2><p class="muted">WebLLM runs compatible language models in your browser using WebGPU where available. The first model download requires internet and substantial free storage.</p><div class="capability" id="gpuCapability">Checking WebGPU support…</div><label for="modelSelect">Model preset</label><select id="modelSelect"><option value="Qwen2.5-0.5B-Instruct-q4f16_1-MLC">Qwen2.5 0.5B · compact</option><option value="Qwen2.5-1.5B-Instruct-q4f16_1-MLC">Qwen2.5 1.5B · experimental</option></select><div class="button-row"><button class="primary-btn" id="loadModel">Download & load model</button><button class="secondary-btn" id="unloadModel">Unload</button></div><div class="progress-track"><div id="modelProgress"></div></div><pre id="modelLog" class="log">Model engine not initialized.</pre><p class="fine-print">Model availability depends on the WebLLM model registry and current browser/device compatibility. Do not download large models until you have checked free iPad storage.</p></div>
+          <div class="section-card"><p class="eyebrow">DEVICE & PRIVACY</p><h2>Workspace settings</h2><div class="setting-row"><span>App mode</span><strong>Local-first PWA</strong></div><div class="setting-row"><span>Project persistence</span><strong>IndexedDB</strong></div><div class="setting-row"><span>Code preview</span><strong>Sandboxed iframe</strong></div><div class="setting-row"><span>Network</span><strong>Only for model download / optional integrations</strong></div><button class="secondary-btn danger" id="clearData">Clear local workspace data</button><p class="fine-print">Clearing browser data may permanently remove local projects and cached model files. Export anything important first.</p></div>
+        </div>
+      </section>
+      <footer><span>© SZC AI</span><span>Designed & developed by <a href="https://szcwebsites.in" target="_blank" rel="noopener noreferrer">SZC Websites</a> · <a href="https://www.instagram.com/shaazzakariyac/" target="_blank" rel="noopener noreferrer">@szcwebsites ↗</a></span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
