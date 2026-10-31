@@ -17,6 +17,7 @@
       <div class="nav-label">WORKSPACE</div>
       <button class="nav-item active" data-view="chat">◈ <span>Agent chat</span></button>
       <button class="nav-item" data-view="developer">⌘ <span>Developer studio</span></button>
+      <button class="nav-item" data-view="creation">✦ <span>Creation studio</span></button>
       <button class="nav-item" data-view="files">▤ <span>Project files</span></button>
       <button class="nav-item" data-view="settings">⚙ <span>Model & settings</span></button>
       <div class="sidebar-bottom">
@@ -63,6 +64,55 @@
             <div class="editor-foot"><span id="editorStatus">Ready</span><button class="text-btn" id="downloadProject">Export project ZIP ↓</button></div>
           </div>
           <div class="preview-panel"><div class="preview-head"><span>LIVE PREVIEW</span><span class="preview-dot">●</span></div><iframe id="previewFrame" title="Website preview" sandbox="allow-scripts"></iframe></div>
+        </div>
+      </section>
+
+      <section class="view" id="creationView">
+        <div class="studio-toolbar"><div><strong>Creation studio</strong><small>Create and export assets locally in your browser.</small></div><span class="mode-pill">BROWSER TOOLS</span></div>
+        <div class="creation-grid">
+          <article class="creation-card">
+            <div class="creation-icon">▧</div><h2>Image canvas</h2><p>Create a canvas image, add a background and text, then export PNG.</p>
+            <label>Canvas size</label><div class="inline-fields"><select id="imageWidth"><option>1080</option><option>1200</option><option>1920</option><option>512</option></select><select id="imageHeight"><option>1080</option><option>1350</option><option>1920</option><option>512</option></select></div>
+            <label>Background</label><input type="color" id="imageBg" value="#dce8f4">
+            <label>Text on canvas</label><input id="imageText" value="Create something remarkable" placeholder="Your text">
+            <button class="primary-btn" id="makeImage">Create PNG</button><canvas id="imageCanvas" width="1080" height="1080"></canvas>
+          </article>
+          <article class="creation-card">
+            <div class="creation-icon">◇</div><h2>SVG vector creator</h2><p>Generate editable vector artwork from a simple shape and text brief.</p>
+            <label>Text</label><input id="svgText" value="SZC" maxlength="40">
+            <label>Shape</label><select id="svgShape"><option value="circle">Circle</option><option value="rounded">Rounded square</option><option value="none">Text only</option></select>
+            <label>Color</label><input type="color" id="svgColor" value="#172b40">
+            <button class="primary-btn" id="makeSvg">Create SVG</button>
+            <div class="asset-preview" id="svgPreview">SVG preview appears here</div>
+          </article>
+          <article class="creation-card">
+            <div class="creation-icon">▶</div><h2>Video maker</h2><p>Create a simple animated title video from canvas frames and export WebM where supported.</p>
+            <label>Video title</label><input id="videoTitle" value="SZC AI — Create without limits">
+            <label>Duration</label><select id="videoDuration"><option value="3">3 seconds</option><option value="5">5 seconds</option><option value="8">8 seconds</option></select>
+            <button class="primary-btn" id="makeVideo">Render video</button>
+            <video id="videoPreview" controls playsinline></video><p class="fine-print" id="videoStatus">WebM export depends on MediaRecorder support in Safari.</p>
+          </article>
+          <article class="creation-card">
+            <div class="creation-icon">▤</div><h2>PDF creator</h2><p>Create a clean PDF document from a title and formatted text.</p>
+            <label>Document title</label><input id="pdfTitle" value="SZC AI Project Brief">
+            <label>Content</label><textarea id="pdfContent" rows="5">Project overview
+
+Created with SZC AI.
+Add your notes, proposal, brief or documentation here.</textarea>
+            <button class="primary-btn" id="makePdf">Create PDF</button>
+          </article>
+          <article class="creation-card">
+            <div class="creation-icon">▣</div><h2>ZIP packager</h2><p>Package your current website files or generated assets into a ZIP archive.</p>
+            <div class="asset-preview"><strong>Current project</strong><small>index.html · styles.css · app.js</small><small>Includes current editor contents.</small></div>
+            <button class="primary-btn" id="makeZip">Export current project ZIP</button>
+            <button class="secondary-btn" id="makeAssetsZip">Export generated assets ZIP</button>
+          </article>
+          <article class="creation-card">
+            <div class="creation-icon">＋</div><h2>Import & convert</h2><p>Bring an image, SVG, PDF or video into your workspace for preview and download.</p>
+            <label>Select a file</label><input type="file" id="assetImport" accept="image/*,.svg,.pdf,video/*">
+            <div class="asset-preview" id="importPreview">No file selected</div>
+            <button class="secondary-btn" id="downloadImported" disabled>Download imported file</button>
+          </article>
         </div>
       </section>
 

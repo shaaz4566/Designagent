@@ -29,6 +29,11 @@ On iPad:
 - HTML/CSS/JS editor
 - Sandboxed iframe preview
 - ZIP export (JSZip is loaded on first export)
+- Image canvas and PNG export
+- Editable SVG shape/text creator and SVG export
+- Simple animated title video export to WebM where MediaRecorder supports it
+- PDF document creation (jsPDF loaded on first use)
+- Asset import/preview for images and videos; PDF import metadata
 - WebLLM model loading experiment
 - Local model chat after successful model initialization
 - Offline app-shell cache
@@ -42,7 +47,7 @@ This is an MVP foundation, not the complete autonomous agent described in the ar
 - First-time runtime, ZIP library and model downloads need internet.
 - Browser storage may be evicted by iPadOS. Export important projects.
 - A PWA cannot run unrestricted terminal commands, install desktop applications, or continue executing after iPadOS suspends it.
-- The chat model currently has no autonomous file-editing tool loop. The editor is functional independently.
+- The chat model currently has no autonomous file-editing tool loop. Image/SVG/video/PDF tools are basic browser-based creators, not replacements for professional creative applications. The editor is functional independently.
 - Remote fonts and dynamic libraries are optional network dependencies; for a stricter offline build, vendor them locally and remove the Google Fonts import.
 
 ## Safety
